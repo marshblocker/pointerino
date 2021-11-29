@@ -1,24 +1,26 @@
 from __future__ import annotations
 from dataclasses import dataclass
-from typing import Optional
+from typing import Generic, Optional, TypeVar
+
+T = TypeVar("T")
 
 @dataclass
-class Node:
-	data: int 
-	next: Optional[Node] = None
+class Node(Generic[T]):
+	data: T 
+	next: Optional[Node[T]] = None
 
 @dataclass
-class LinkedList:
-	head: Optional[Node] = None
+class LinkedList(Generic[T]):
+	head: Optional[Node[T]] = None
 
-	def add_node(self, new: Node) -> None:
+	def add_node(self, new: Node[T]) -> None:
 		""" 
 		Assign new as the head node of the linked list.
 		"""
 		new.next = self.head
 		self.head = new
 
-	def delete_node(self, target: int, all: bool = False) -> None:
+	def delete_node(self, target: T, all: bool = False) -> None:
 		"""
 		Delete the first discovered node with data == target from the 
 		linked list. If the all flag is set to True, delete all nodes with 
@@ -26,25 +28,23 @@ class LinkedList:
 		equal to target, this method performs no action.
 		"""
 		alpha = self.head
-		beta: Optional[Node] = None
+		beta: Optional[Node[T]] = None
 
 		found: bool = False 
 
 		while alpha != None:
 			if alpha.data == target:
-				if alpha == self.head:	# target node is the head node.
-					self.head = alpha.next
+				if beta == None:  # target node is the head node
+					self.head = alpha.next 
 				else:
-					assert isinstance(beta, Node)
 					beta.next = alpha.next
-				found = True
-				print(f"{target} is successfully deleted from the Linked List.")
+
+				found = True 
 				if not all:
 					break
 
-			beta = alpha
+			beta = alpha 
 			alpha = alpha.next
-			assert isinstance(alpha, Optional[Node])
 
 		if not found:
 			print(f"{target} is not found in the Linked List.")
@@ -76,7 +76,7 @@ class LinkedList:
 
 		alpha = self.head.next
 		beta = self.head 
-		gamma: Optional[Node] = None 
+		gamma: Optional[Node[T]] = None 
 
 		while True:
 			if alpha == None:  # reverse the last node.
