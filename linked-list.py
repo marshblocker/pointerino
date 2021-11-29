@@ -18,14 +18,17 @@ class LinkedList:
 		new.next = self.head
 		self.head = new
 
-	def delete_node(self, target: int) -> None:
+	def delete_node(self, target: int, all: bool = False) -> None:
 		"""
-		Delete node N with N.data == target from the linked list. If no nodes
-		in the linked list have their data member equal to target, this method
-		performs no action.
+		Delete the first discovered node with data == target from the 
+		linked list. If the all flag is set to True, delete all nodes with 
+		data == target. If no nodes in the linked list have their data member 
+		equal to target, this method performs no action.
 		"""
 		alpha = self.head
 		beta: Optional[Node] = None
+
+		found: bool = False 
 
 		while alpha != None:
 			if alpha.data == target:
@@ -34,13 +37,17 @@ class LinkedList:
 				else:
 					assert isinstance(beta, Node)
 					beta.next = alpha.next
+				found = True
 				print(f"{target} is successfully deleted from the Linked List.")
-				return 
+				if not all:
+					break
 
 			beta = alpha
 			alpha = alpha.next
+			assert isinstance(alpha, Optional[Node])
 
-		print(f"{target} is not found in the Linked List.")
+		if not found:
+			print(f"{target} is not found in the Linked List.")
 		return
 
 	def traverse_linked_list(self) -> None:
