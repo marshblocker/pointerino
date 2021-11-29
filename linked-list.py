@@ -78,14 +78,13 @@ class LinkedList(Generic[T]):
 		beta = self.head 
 		gamma: Optional[Node[T]] = None 
 
-		while True:
-			if alpha == None:  # reverse the last node.
-				beta.next = gamma 
-				self.head = beta
-				break
+		while beta != None:
 			beta.next = gamma 
 			gamma = beta 
 			beta = alpha 
-			alpha = alpha.next
+			if alpha != None:
+				alpha = alpha.next
+		self.head = gamma 
 
 		return 
+
