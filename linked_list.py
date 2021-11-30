@@ -9,9 +9,9 @@ class Node(Generic[T]):
 	data: T 
 	next: Optional[Node[T]] = None
 
-@dataclass
 class LinkedList(Generic[T]):
-	head: Optional[Node[T]] = None
+	def __init__(self) -> None:
+		self.head: Optional[Node[T]] = None
 
 	def add_node(self, new: Node[T]) -> None:
 		""" 
