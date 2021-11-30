@@ -1,29 +1,23 @@
-from __future__ import annotations
-from dataclasses import dataclass
-from typing import Generic, Optional, TypeVar
-
-T = TypeVar("T")
-
-@dataclass
-class Node(Generic[T]):
-	data: T 
-	next: Optional[Node[T]] = None
+from node import *
 
 class LinkedList(Generic[T]):
+	
 	def __init__(self) -> None:
+		""" Initialize class attribute head. """
 		self.head: Optional[Node[T]] = None
 
-	def add_node(self, new: Node[T]) -> None:
+	def add_node(self, data: T) -> None:
 		""" 
-		Assign new as the head node of the linked list.
+		Creates node new and assigns new as the head node of the linked list.
 		"""
+		new: Node[T] = Node(data)
 		new.next = self.head
 		self.head = new
 
 	def delete_node(self, target: T, all: bool = False) -> None:
 		"""
 		Delete the first discovered node with data == target from the 
-		linked list. If the all flag is set to True, delete all nodes with 
+		linked list. If all = True, delete all nodes with 
 		data == target. If no nodes in the linked list have their data member 
 		equal to target, this method performs no action.
 		"""
