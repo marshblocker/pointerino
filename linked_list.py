@@ -1,84 +1,90 @@
+# Changes
+# - Set Node class as a separate file
+# - add_node() only needs the data member of the Node class as parameter.
+#   add_node creates the new node using the passed data parameter before
+#   inserting to the linked list.
+
 from node import *
 
+
 class LinkedList(Generic[T]):
-	
-	def __init__(self) -> None:
-		""" Initialize class attribute head. """
-		self.head: Optional[Node[T]] = None
 
-	def add_node(self, data: T) -> None:
-		""" 
-		Creates node new and assigns new as the head node of the linked list.
-		"""
-		new: Node[T] = Node(data)
-		new.next = self.head
-		self.head = new
+    def __init__(self) -> None:
+        """ Initialize class attribute head. """
+        self.head: Optional[Node[T]] = None
 
-	def delete_node(self, target: T, all: bool = False) -> None:
-		"""
-		Delete the first discovered node with data == target from the 
-		linked list. If all = True, delete all nodes with 
-		data == target. If no nodes in the linked list have their data member 
-		equal to target, this method performs no action.
-		"""
-		alpha = self.head
-		beta: Optional[Node[T]] = None
+    def add_node(self, data: T) -> None:
+        """ 
+        Creates node new and assigns new as the head node of the linked list.
+        """
+        new: Node[T] = Node(data)
+        new.next = self.head
+        self.head = new
 
-		found: bool = False 
+    def delete_node(self, target: T, all: bool = False) -> None:
+        """
+        Delete the first discovered node with data == target from the 
+        linked list. If all = True, delete all nodes with data == target. 
+        If no nodes in the linked list have their data member
+        equal to target, this method performs no action.
+        """
+        alpha = self.head
+        beta: Optional[Node[T]] = None
 
-		while alpha != None:
-			if alpha.data == target:
-				if beta == None:  # target node is the head node
-					self.head = alpha.next 
-				else:
-					beta.next = alpha.next
+        found: bool = False
 
-				found = True 
-				if not all:
-					break
+        while alpha != None:
+            if alpha.data == target:
+                if beta == None:  # target node is the head node
+                    self.head = alpha.next
+                else:
+                    beta.next = alpha.next
 
-			beta = alpha 
-			alpha = alpha.next
+                found = True
+                if not all:
+                    break
 
-		if not found:
-			print(f"{target} is not found in the Linked List.")
-		return
+            beta = alpha
+            alpha = alpha.next
 
-	def traverse_linked_list(self) -> None:
-		"""
-		Print the nodes of the linked list starting from the node pointed
-		to by self.head.
-		"""
-		t = self.head 
+        if not found:
+            print(f"{target} is not found in the Linked List.")
+        return
 
-		while t != None:
-			print(f"{t.data} -> ", end= "")
-			t = t.next
-		print("None")
+    def traverse_linked_list(self) -> None:
+        """
+        Print the nodes of the linked list starting from the node pointed
+        to by self.head.
+        """
+        t = self.head
 
-		return 
+        while t != None:
+            print(f"{t.data} -> ", end="")
+            t = t.next
+        print("None")
 
-	def reverse_linked_list(self) -> None:
-		"""
-		Reverse the direction of the linked list such that the head node
-		now points to None and self.head now points to the tail node. If
-		the linked list contains one or no node, this method performs no
-		action.
-		"""
-		if self.head == None:
-			return 
+        return
 
-		alpha = self.head.next
-		beta = self.head 
-		gamma: Optional[Node[T]] = None 
+    def reverse_linked_list(self) -> None:
+        """
+        Reverse the direction of the linked list such that the head node
+        now points to None and self.head now points to the tail node. If
+        the linked list contains one or no node, this method performs no
+        action.
+        """
+        if self.head == None:
+            return
 
-		while beta != None:
-			beta.next = gamma 
-			gamma = beta 
-			beta = alpha 
-			if alpha != None:
-				alpha = alpha.next
-		self.head = gamma 
+        alpha = self.head.next
+        beta = self.head
+        gamma: Optional[Node[T]] = None
 
-		return 
+        while beta != None:
+            beta.next = gamma
+            gamma = beta
+            beta = alpha
+            if alpha != None:
+                alpha = alpha.next
+        self.head = gamma
 
+        return
