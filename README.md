@@ -1,2 +1,2 @@
-# Pointerino - Python Implementation of Common Pointer-based Data Structures
-blab lbaladfs
+# Pointerino
+## Python Implementation of Common Pointer-based Data Structures
