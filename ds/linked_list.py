@@ -1,7 +1,3 @@
-# Changes
-# - traverse_linked_list() returns a list of nodes ordered in the order
-#   the linked list was traversed. Also, the out parameter specifies if
-#   the return value of traverse_linked_list() will be printed.
 from .node import *
 
 
