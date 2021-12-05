@@ -4,24 +4,24 @@ from .node import *
 class LinkedList(Generic[T]):
 
     def __init__(self) -> None:
-        """ Initialize class attribute head. """
+        ''' Initialize class attribute head. '''
         self.head: Optional[Node[T]] = None
 
     def add_node(self, data: T) -> None:
-        """ 
+        ''' 
         Creates node new and assigns new as the head node of the linked list.
-        """
+        '''
         new: Node[T] = Node(data)
         new.next = self.head
         self.head = new
 
     def delete_node(self, target: T, all: bool = False) -> None:
-        """
+        '''
         Delete the first discovered node with data == target from the 
         linked list. If all = True, delete all nodes with data == target. 
         If no nodes in the linked list have their data member
         equal to target, this method performs no action.
-        """
+        '''
         alpha = self.head
         beta: Optional[Node[T]] = None
 
@@ -42,14 +42,14 @@ class LinkedList(Generic[T]):
             alpha = alpha.next
 
         if not found:
-            print(f"{target} is not found in the Linked List.")
+            print(f'{target} is not found in the Linked List.')
         return
 
     def traverse_linked_list(self, out: bool = True) -> list[Node[T]]:
-        """
+        '''
         Print the nodes of the linked list starting from the node pointed
         to by self.head.
-        """
+        '''
         arrangement: list[Node[T]] = []
         t = self.head
 
@@ -58,18 +58,18 @@ class LinkedList(Generic[T]):
             t = t.next
         
         if out:
-            [print(f"{node.data} ->", end= "") for node in arrangement]
-            print("None")
+            [print(f'{node.data} ->', end= '') for node in arrangement]
+            print('None')
 
         return arrangement
 
     def reverse_linked_list(self) -> None:
-        """
+        '''
         Reverse the direction of the linked list such that the head node
         now points to None and self.head now points to the tail node. If
         the linked list contains one or no node, this method performs no
         action.
-        """
+        '''
         if self.head == None:
             return
 
